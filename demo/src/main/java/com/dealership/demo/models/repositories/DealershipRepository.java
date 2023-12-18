@@ -26,17 +26,6 @@ public class DealershipRepository {
             ps.setString(2, dealership.getAddress());
 
             int rowsAffected = ps.executeUpdate();
-
-            if (rowsAffected > 0) {
-                try (ResultSet generatedKeys = ps.getGeneratedKeys()) {
-                    if (generatedKeys.next()) {
-                        dealership.setId(generatedKeys.getInt(1));
-                        System.out.println("Dealership created successfully with ID: " + dealership.getId());
-                    }
-                }
-            } else {
-                System.out.println("Failed to create the dealership.");
-            }
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
@@ -52,7 +41,7 @@ public class DealershipRepository {
              ResultSet rs = ps.executeQuery()) {
 
             while (rs.next()) {
-                Dealership dealership = new Dealership();
+                Dealership dealership = new Dealership(123, "ChrisGs Dealership", "Dallas,TX", 123123);
                 dealership.setId(rs.getInt("id"));
                 dealership.setName(rs.getString("name"));
                 dealership.setAddress(rs.getString("location"));
@@ -123,7 +112,6 @@ public class DealershipRepository {
         }
     }
 }
-    //CRUD functions for dealership
-    //getAllDearlerships, getDealershipById, createDealership, updateDealership, deleteDealership
+
 
 
